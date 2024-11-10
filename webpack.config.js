@@ -40,14 +40,23 @@ export default {
                     }
                 ],
             },
+            {
+                test: /\.njk$/,
+                use: [
+                    {
+                        loader: 'simple-nunjucks-loader',
+                        options: {}
+                    }
+                ]
+            }
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.njk'
         }),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './src/about.njk',
             filename: 'about.html'
         }),
     ],
