@@ -1,7 +1,1 @@
-@use 'sass:color';
-
-$bgcolor: beige;
-
-body{
-    background-color: color.scale($bgcolor, $lightness: -30%);
-}
+@use 'bulma/sass';
