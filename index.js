@@ -1,9 +1,3 @@
-import common from "./common.js";
-common.hello();
-import es from "./es.js";
-es.hello();
+import chalk from 'chalk'
 
-// const common require = require("./common.js");
-// common.hello();
-// const es require = require("./es.js");
-// es.hello();
+console.log(chalk.red.bgGray('hello world'))
