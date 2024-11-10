@@ -1,3 +1,7 @@
-const fs = require('fs');
+import common from "./common.js";
 
-fs.writeFileSync("test.txt", 'Some text')
+common.hello();
+
+import es from "./es.js";
+
+es.hello();
