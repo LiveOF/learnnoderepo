@@ -3,6 +3,14 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const __filename = import.meta.filename;
 const __dirname = import.meta.dirname;
+
+let name = "Oleksii Filiakov"
+
+const response = await fetch("https://rickandmortyapi.com/api/character")
+const data = await response.json()
+const characters = data.results
+console.log(characters)
+
 export default {
     entry: './src/index.js',
     output: {
@@ -53,7 +61,10 @@ export default {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.njk'
+            template: './src/index.njk',
+            templateParameters: {
+               name, characters
+            }
         }),
         new HtmlWebpackPlugin({
             template: './src/about.njk',
