@@ -6,63 +6,69 @@ const __dirname = import.meta.dirname;
 
 let name = "Oleksii Sidorkin";
 
-const response = await fetch("https://www.google.com/");
-console.log(response);
-export default {
-    entry: "./src/index.js",
-    output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist")
-    },
-    devServer: {
-        static: {
-          directory: path.join(__dirname, 'public'),
-        },
-        compress: true,
-        port: 9000,
+
+export default async () => {
+const response = await fetch("https://rickandmortyapi.com/api/character");
+const data = await response.json()
+const characters = data.results
+
+  return {
+      entry: "./src/index.js",
+      output: {
+          filename: "main.js",
+          path: path.resolve(__dirname, "dist")
+      },
+      devServer: {
+          static: {
+              directory: path.join(__dirname, 'public'),
+          },
+          compress: true,
+          port: 9000,
       },
       module: {
-        rules: [
-          {
-            test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
-          },
-          {
-            test: /\.scss$/i,
-            use: [
-                "style-loader",
-                "css-loader",
-                {
-                    loader: "sass-loader",
-                    options: {
-                        sassOptions: {
-                            quietDeps: true,
-                        }
-                    }
-                }
-            ],
-          },
-          {
-            test: /\.njk$/,
-            use: [
-                {
-                    loader: 'simple-nunjucks-loader',
-                    options: {}
-                }
-            ]
-          }
-        ],
+          rules: [
+              {
+                  test: /\.css$/i,
+                  use: ["style-loader", "css-loader"],
+              },
+              {
+                  test: /\.scss$/i,
+                  use: [
+                      "style-loader",
+                      "css-loader",
+                      {
+                          loader: "sass-loader",
+                          options: {
+                              sassOptions: {
+                                  quietDeps: true,
+                              }
+                          }
+                      }
+                  ],
+              },
+              {
+                  test: /\.njk$/,
+                  use: [
+                      {
+                          loader: 'simple-nunjucks-loader',
+                          options: {}
+                      }
+                  ]
+              }
+          ],
       },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/index.njk",
-            templateParameters: {
-                name // name: name
-            }
-        }),
-        new HtmlWebpackPlugin({
-            template: "./src/about.njk",
-            filename: "about.html"
-        }),
-    ],
+      plugins: [
+          new HtmlWebpackPlugin({
+              template: "./src/index.njk",
+              templateParameters: {
+                  name, // name: name
+                  characters
+              }
+          }),
+          new HtmlWebpackPlugin({
+              template: "./src/about.njk",
+              filename: "about.html"
+          }),
+      ],
+  };
 };
