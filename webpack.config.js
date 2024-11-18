@@ -9,7 +9,18 @@ let name = "Oleksii Filiakov"
 const response = await fetch("https://rickandmortyapi.com/api/character")
 const data = await response.json()
 const characters = data.results
-console.log(characters)
+
+const pages = [];
+characters.forEach(character => {
+    let page = new HtmlWebpackPlugin({
+        template: './src/character.njk',
+        filename: `character_${character.id}.html`,
+        templateParameters: {
+            character,
+         }
+    });
+    pages.push(page)
+});
 
 export default {
     entry: './src/index.js',
@@ -70,5 +81,6 @@ export default {
             template: './src/about.njk',
             filename: 'about.html'
         }),
+        ...pages
     ],
 }
