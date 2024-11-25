@@ -1,7 +1,7 @@
 {% extends "src/partials/layout.njk" %}
 {% block content %}
   <div class="content">
-    <h1>It Works!</h1>
+    <h1>It Works and is Cool!</h1>
     <h1>Hello {{ name }}!</h1>
     <div class="columns is-multiline">
       {% for character in characters %}
@@ -33,7 +33,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <a class="button is-primary">Read More</a>
+                <a href="/character_{{ character.id }}.html" class="button is-primary">Read More</a>
               </div>
             </div>
           </div>
