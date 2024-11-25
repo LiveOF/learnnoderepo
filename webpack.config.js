@@ -8,7 +8,7 @@ let name = "Oleksii Sidorkin";
 
 
 export default async () => {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const response = await fetch("https://rickandmortyapi.com/api/character?page=22");
     const data = await response.json();
     const characters = data.results;
     const pages = [];
