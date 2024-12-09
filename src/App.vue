@@ -1,17 +1,37 @@
 <script setup>
 import { ref } from 'vue';
 
-let message = ref('Hello vue!')
-setTimeout(() => {
-    message.value = "Hello";
-    console.log('Msg changed');
-}, 10_000);
+
+let items = ref(["Milk", "Bread", "Vodka", "Beer", "Chips"]);
+let newItem = ref('')
+
+let i = 0;
+
+function add(){
+    if (newItem.value.trim() !== ''){
+    items.value.push(newItem.value);
+    }
+    newItem.value="";
+}
+
 </script>
 <template>
-    <div class="container">
+    <div class="container mt-3">
         <div class="content">
-            <h1>{{ message }}</h1>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" v-model="newItem" @keypress.enter = "add">
+                </div>
+                <div class="control">
+                    <button class="button is-primary" @click="add">Add</button>
+                </div>
+            </div>
+
+            <ul>
+                <li v-for="item in items"> {{ item }}</li>
+            </ul>
         </div>
+
     </div>
 </template>
 <style></style>
