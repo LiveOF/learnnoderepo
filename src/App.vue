@@ -6,7 +6,7 @@ import RouterTabs from './components/RouterTabs.vue';
 </script>
 <template>
     <RouterTabs></RouterTabs>
-    <div class="container">
+    <div class="container" v-if="$route.meta.container === undefined">
         <section class="section">
             <Suspense>
                 <RouterView></RouterView>
